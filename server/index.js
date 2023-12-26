@@ -16,7 +16,7 @@ const url = process.env.CONNECTION_URL.replace("<password>",password)
 app.use("/api/user", router)
 
 mongoose.connect(url)
-.then(res=>console.log("Db connected"))
+.then(res=>console.log("Rehim connected"))
 .catch(err =>console.log(`Rehim yox ${err}`))
 
 app.listen(port,()=>{
