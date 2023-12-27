@@ -6,7 +6,7 @@ const SignUp = () => {
   const [password, setpassword] = useState("")
   const [email, setEmail] = useState("")
   const handleRegister = async()=>{
-   const resp = await axios.post('http://localhost:5500/api/user',
+   const resp = await axios.post('http://localhost:5500/api/user/register',
     {
       "username":username,
       "email":email,

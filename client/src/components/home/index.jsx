@@ -41,7 +41,7 @@ function Home() {
         <>
             {data && data.map((item) => (
                 <ul key={item._id}>
-                    <li>{item.username} sa</li>
+                    <li>{item.username}</li>
                     <li>{item.email}</li>
                     <li>{item.password}</li>
                     <li>{item.role}</li>

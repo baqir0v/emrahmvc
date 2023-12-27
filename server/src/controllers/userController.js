@@ -36,7 +36,7 @@ const userActions = {
                 return res.status(404).json({ error: "User not found" });
             }
 
-            const token = jwt.sign({ userId: findUser._id }, "secretKey", {
+            const token = jwt.sign({ userId: findUser._id,username:findUser.username }, "secretKey", {
                 expiresIn: "7d",
             });
             res.status(200).json(token)
