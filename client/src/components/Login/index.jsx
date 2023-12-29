@@ -7,29 +7,29 @@ import { jwtDecode } from "jwt-decode";
 const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setpassword] = useState("")
-    const {setUser,user} = useContext(UserContext)
-    
+    const { setUser, user } = useContext(UserContext)
+
     const handleRegister = async () => {
         try {
             const resp = await axios.post('http://localhost:5500/api/user/login',
-            {
-                "username": username,
-                "password": password,
+                {
+                    "username": username,
+                    "password": password,
+                }
+            )
+            console.log(resp.data);
+            const decoded = jwtDecode(resp.data);
+            setUser(decoded.username)
+            console.log(decoded);
+            if (resp.data) {
+                localStorage.setItem('token', resp.data)
+                localStorage.setItem("username", username)
             }
-        )
-        console.log(resp.data);
-        const decoded = jwtDecode(resp.data);
-        setUser(decoded.username)
-        console.log(decoded);
-        if (resp.data) {
-            localStorage.setItem('token',resp.data)
-            localStorage.setItem("username",username)
-        }
         } catch (error) {
-            console.log("Alinin Ali");
+            console.log("Alinin Ali", error.message);
         }
     }
-    const logout = ()=>{
+    const logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("username")
         setUser(null)
@@ -40,9 +40,9 @@ const Login = () => {
             <br />
             <input type="password" name='password' value={password} onChange={(e) => setpassword(e.target.value)} placeholder='Password' />
             <br />
-            <button onClick={() => {
+            {!user ? <button onClick={() => {
                 handleRegister()
-            }}>LogIn</button>
+            }}>LogIn</button> : ""}
             {user ? <button onClick={logout}>Log Out</button> : <p>Gel gir</p>}
         </>
     )
